@@ -25,8 +25,8 @@
 //
 //*****************************************************************************
 
-#ifndef Exosite_h
-#define Exosite_h
+#ifndef ExositeESP32_h
+#define ExositeESP32_h
 
 #define ACTIVATOR_VERSION   "2.5.3"
 
@@ -71,7 +71,8 @@ class Exosite
   private:
     class Client* client;
     char cik[41];
-    const char *serverName = "m2.exosite.io";
+    // Set serverName to m2.exisite.io if using 
+    const char *serverName = "m2.exosite.com";
     char rxdata[200];
     char aliasList[50];
     char* varPtr;

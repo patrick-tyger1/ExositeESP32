@@ -25,7 +25,7 @@
 //
 //*****************************************************************************
 
-#include "Exosite.h"
+#include "ExositeESP32.h"
 
 #if defined(ESP32)
   Preferences preferences;

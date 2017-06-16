@@ -1,24 +1,30 @@
 #######################################
-# Syntax Coloring Map For Exosite
+# Syntax Coloring Map For ExositeESP32
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
 
-Exosite	KEYWORD1
+ExositeESP32	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-sendToCloud		KEYWORD2
-readFromCloud	KEYWORD2
-readFromCloud	KEYWORD2
-writeRead		KEYWORD2
-provision		KEYWORD2
-time			KEYWORD2
-begin			KEYWORD2
+sendToCloud				KEYWORD2
+readFromCloud			KEYWORD2
+readFromCloud			KEYWORD2
+writeRead				KEYWORD2
+provision				KEYWORD2
+timestamp				KEYWORD2
+begin					KEYWORD2
+read 					KEYWORD2
+write 					KEYWORD2
+longPoll				KEYWORD2
+setDomain 				KEYWORD2
+listAvailableContent	KEYWORD2
+downloadContent			KEYWORD2
 
 #######################################
 # Instances (KEYWORD2)
