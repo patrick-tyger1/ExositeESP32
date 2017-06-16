@@ -27,6 +27,10 @@
 
 #include "Exosite.h"
 
+#if defined(ESP32)
+  Preferences preferences;
+#endif
+
 /*==============================================================================
 * Exosite
 *
@@ -34,7 +38,7 @@
 *=============================================================================*/
 Exosite::Exosite(Client *_client){
   client = _client;
-  #if !defined(ESP8266)
+  #if !defined(ESP8266) or !defined(ESP32)
   fetchNVCIK();
   #endif
 }
@@ -54,7 +58,7 @@ Exosite::Exosite(const String _cik, Client *_client){
 *
 * cik must be fetched after initialization on ESP8266
 *=============================================================================*/
-#if defined(ESP8266)
+#if defined(ESP8266) or defined(ESP32)
 void Exosite::begin(){
   fetchNVCIK();
 }
@@ -1909,9 +1913,25 @@ unsigned long Exosite::timestamp(){
 * Write the CIK to EEPROM
 *=============================================================================*/
 boolean Exosite::saveNVCIK(){
+  #if defined(ESP32)
+    
+    // Open preferences with exosite-app namespace. Opens in in RW-mode so
+    // second parameters is false. Namespace is limited to 15 chars
+    preferences.begin("exosite-app", false);
+
+    // Store CIK value as a string
+    preferences.putString("cik", cik);
+
+    // Close preferences
+    preferences.end();
+
+  #else
+  
   for(int i = 0; i < 40; i++){
     EEPROM.write(CIK_EEPROM_ADDRESS + i, cik[i]);
   }
+  
+  #endif
 
   return true;
 }
@@ -1924,19 +1944,41 @@ boolean Exosite::saveNVCIK(){
 * Fetch the CIK from EEPROM
 *=============================================================================*/
 boolean Exosite::fetchNVCIK(){
-  char tempBuf[41];
+    #if defined(ESP32)
+    
+      // Open preferences with exosite-app namespace. Opens in in RW-mode so
+      // second parameters is false. Namespace is limited to 15 chars
+      preferences.begin("exosite-app", false);
 
-  for(int i = 0; i < 40; i++){
-    tempBuf[i] = EEPROM.read(CIK_EEPROM_ADDRESS + i);
-  }
-  tempBuf[40] = 0;
+      // Retrieve a value. If the key does not exist returns 0
+      // Key name is limited to 15 characters
+      String savedCik = preferences.getString("cik", "");
 
-  if(strlen(tempBuf) == 40){
-    strcpy(cik, tempBuf);
-    return true;
-  }else{
-    return false;
-  }
+      // Close Preferences
+      preferences.end();
+
+      if (savedCik.length() == 40) {
+        strcpy(cik, savedCik.c_str());
+        return true;
+      } else {
+        return false;
+      }
+
+    #else
+      char tempBuf[41];
+
+      for(int i = 0; i < 40; i++){
+        tempBuf[i] = EEPROM.read(CIK_EEPROM_ADDRESS + i);
+      }
+      tempBuf[40] = 0;
+
+      if(strlen(tempBuf) == 40){
+        strcpy(cik, tempBuf);
+        return true;
+      }else{
+        return false;
+      }
+    #endif
 }
 
 

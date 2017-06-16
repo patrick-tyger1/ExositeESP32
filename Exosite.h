@@ -54,7 +54,12 @@
 
 #include <SPI.h>
 #include <Client.h>
-#include <EEPROM.h>
+#if defined(ESP32)
+    #include <Preferences.h>
+    extern Preferences preferences;
+#else
+    #include <EEPROM.h>
+#endif
 
 
 #ifdef EXOSITEDEBUGMEM
@@ -91,7 +96,7 @@ class Exosite
     Exosite(const char *_cik, Client *_client);
     Exosite(const String _cik, Client *_client);
 
-    #if defined(ESP8266)
+    #if defined(ESP8266) or defined(ESP32)
     void begin();
     #endif
 
