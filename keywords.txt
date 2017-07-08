@@ -13,8 +13,6 @@ ExositeESP32	KEYWORD1
 #######################################
 
 sendToCloud				KEYWORD2
-readFromCloud			KEYWORD2
-readFromCloud			KEYWORD2
 writeRead				KEYWORD2
 provision				KEYWORD2
 timestamp				KEYWORD2
@@ -24,6 +22,7 @@ write 					KEYWORD2
 longPoll				KEYWORD2
 setDomain 				KEYWORD2
 listAvailableContent	KEYWORD2
+getContentInfo			KEYWORD2
 downloadContent			KEYWORD2
 
 #######################################

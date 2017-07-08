@@ -28,7 +28,7 @@
 #ifndef ExositeESP32_h
 #define ExositeESP32_h
 
-#define ACTIVATOR_VERSION   "2.5.3"
+#define ACTIVATOR_VERSION   "2.5.4"
 
 // Select a Debug Level: 
 //#define EXOSITEDEBUG 1
