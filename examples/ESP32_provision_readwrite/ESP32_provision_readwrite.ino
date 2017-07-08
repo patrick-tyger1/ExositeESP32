@@ -3,8 +3,8 @@
 // ESP32 Provision and Read from Exosite   - An example of how to use the ExositeESP32 
 //                                          library with a ESP32 Dev Board for basic
 //                                          provisioning, reading, and writing. 
-//                                          The library was ported over from the
-//                                          standard Exosite library v2.5.2 and
+//                                          The ExositeESP32 library was ported over 
+//                                          from the standard Exosite library v2.5.3 and
 //                                          works identically.
 //
 // Requires the ESP32 Arduino Core installed
@@ -21,8 +21,8 @@ Exosite exosite(&client);
 byte macData[6];
 char macString[18];
 char testChar[41] = {0};
-const char* ssid = "HibikiHouse";
-const char* pass = "arigato!";
+const char* ssid = "<WIFI SSID Here>";
+const char* pass = "<WIFI Password Here>";
 
 
 void setup() {
